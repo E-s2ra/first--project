@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+
+:root {
+    --color: #3a6cf4;
+    --card-bg: #fff;
+    --accent: #3a6cf4; /* Blue in light mode */
+    --text-main: #333;
+    --bg-main: #f9fafb;
+    --overlay: rgba(255, 255, 255, 0.7);
+}
+
+body.dark-mode {
+    --card-bg: #1e1e1e;
+    --accent: #ffffff; /* White in dark mode */
+    --text-main: #f0f0f0;
+    --bg-main: #121212;
+    --overlay: rgba(0, 0, 0, 0.8);
+}
+
+* {
+    padding: 0; margin: 0;
+    text-transform: capitalize;
+    font-family: "Poppins", sans-serif;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    transition: 0.3s;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 100px;
+    background: var(--card-bg);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: fixed; width: 100%; z-index: 10000;
+}
+
+#logo { color: var(--color); font-weight: 700; font-size: 28px; }
+
+/* Apply accent color to all icons */
+.header-icon, .skill-icon i, .ico i, .icon a i {
+    color: var(--accent) !important;
+    transition: 0.3s;
+}
+
+nav ul { display: flex; gap: 30px; list-style: none; align-items: center; }
+nav ul li a { text-decoration: none; color: var(--text-main); font-weight: 500; transition: 0.3s; }
+nav ul li a:hover { color: var(--color); }
+
+/* --- DARK MODE SWITCH --- */
+.theme-switch-wrapper { display: flex; align-items: center; gap: 10px; }
+.theme-switch { position: relative; display: inline-block; width: 40px; height: 20px; }
+.theme-switch input { display: none; }
+.slider { 
+    position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; 
+    background-color: #ccc; transition: .4s; border-radius: 34px; 
+}
+.slider:before { 
+    position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; 
+    background-color: white; transition: .4s; border-radius: 50%; 
+}
+input:checked + .slider { background-color: var(--color); }
+input:checked + .slider:before { transform: translateX(20px); }
+
+/* --- CONTENT --- */
+.content {
+    padding: 150px 100px 80px;
+    display: flex; justify-content: space-between; align-items: center;
+    min-height: 100vh;
+    background-image: linear-gradient(var(--overlay), var(--overlay)), url('../asse/pp.png');
+    background-size: cover; background-position: center; background-attachment: fixed;
+}
+.content h2 { font-size: 48px; }
+.content h2 span { color: var(--color); }
+.btn { background: var(--color); color: white; padding: 12px 25px; border-radius: 30px; text-decoration: none; display: inline-block; margin: 20px 0; }
+#pic { width: 350px; height: 350px; border-radius: 50%; object-fit: cover; border: 5px solid var(--color); }
+
+/* --- CARDS & GRIDS --- */
+.services, .project, .contact {
+     padding: 80px 100px; }
+.title { text-align: center;
+     color: var(--color);
+      margin-bottom: 40px; font-size: 30px;
+     }
+.cord, .img-card, .card { background: var(--card-bg);
+     padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.skill { background: rgba(0,0,0,0.05); text-align: center; padding: 20px; border-radius: 10px; transition: 0.3s; }
+.skill:hover { transform: translateY(-5px); }
+.my-card { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+.img-card { width: 320px; text-align: center; }
+.img { width: 100%; border-radius: 10px; }
+.content-card { display: flex; justify-content: center; gap: 20px; }
+.card { width: 280px; text-align: center; }
+
+/* --- LEFT MENU MOBILE --- */
+.menu-toggle { display: none; cursor: pointer; font-size: 24px; color: var(--color); }
+
+@media (max-width: 991px) {
+    header { padding: 15px 30px; }
+    .content, .services, .project, .contact { padding: 100px 30px; }
+    .content { flex-direction: column; text-align: center; }
+}
+
+@media (max-width: 768px) {
+    .menu-toggle { display: block; }
+    nav ul.nav-menu {
+        position: fixed; left: -100%; top: 0; 
+        flex-direction: column; background: var(--card-bg);
+        width: 250px; height: 100vh; padding: 80px 30px;
+        transition: 0.4s ease; box-shadow: 5px 0 15px rgba(0,0,0,0.2);
+        align-items: flex-start;
+    }
+    nav ul.nav-menu.active { left: 0; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .content-card { flex-direction: column; align-items: center; }
+}
+
+/* General Button Style (for "My Cv") */
+.btn { 
+    background-color: var(--color); 
+    color: white !important; /* Forces text to stay white */
+    padding: 12px 25px; 
+    border-radius: 30px; 
+    text-decoration: none; 
+    display: inline-block; 
+    margin: 20px 0;
+    font-weight: 600;
+    transition: 0.3s ease;
+    border: none;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    background-color: #2954d4; /* Slightly darker blue on hover */
+}
+
+/* Project Card Buttons (html, css, js) */
+.my-btn { 
+    background-color: var(--color); 
+    color: #fff; 
+    border: none; 
+    padding: 8px 18px; 
+    border-radius: 8px; 
+    margin: 5px; 
+    cursor: pointer; 
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.my-btn:hover {
+    background-color: var(--text-main); /* Changes color based on Dark/Light mode */
+    color: var(--bg-main);
+}
+
+/* Ensure buttons look good in Dark Mode */
+body.dark-mode .my-btn {
+    background-color: var(--color);
+    color: #ffffff;
+}
